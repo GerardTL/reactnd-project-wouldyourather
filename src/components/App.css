@@ -1,0 +1,305 @@
+/* General */
+
+a {
+  text-decoration: none;
+  color: #252525;
+}
+
+.active {
+  font-weight: bold;
+}
+
+.center {
+  text-align: center;
+}
+
+.clear-left {
+  clear: left;
+}
+
+ul {
+  padding-left: 0;
+}
+
+li {
+  list-style-type: none;
+  padding: 10px;
+  text-decoration: none;
+}
+
+/* Would You Rather, General */
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 10px;
+  background-color: #f8ead5; /* AntiqueWhite */
+}
+
+.nav {
+  margin-bottom: 30px;
+  border-top: 1px solid #cfb289; /* Tan */
+  border-bottom: 1px solid #cfb289; /* Tan */
+}
+
+.nav ul {
+  margin: 7px 0;
+  text-align: center;
+}
+
+.nav li {
+  display: inline;
+}
+
+/* container used in multiple pages */
+
+.question-main,
+.questions-list {
+  width: 100%;
+  max-width: 590px;
+  margin: 0 auto 10px auto;
+  border: 1px solid #cfb289;
+  border-radius: 3px;
+}
+
+.question-main {
+  overflow: hidden;
+}
+
+.question-header {
+  margin: 0;
+  padding: 10px;
+  border-bottom: 1px solid #cfb289;
+  background-color: #cfb289;
+}
+
+.question-main img.avatar {
+  height: 160px;
+  border-radius: 80px;
+  margin: 10px 10px 10px 20px;
+  float: left;
+}
+
+/* Login */
+
+.login-box {
+  width: 100%;
+  width: 360px;
+  margin: 0 auto;
+  border: 1px solid #cfb289;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.login-box img {
+  width: 320px;
+  height: 166px;
+}
+
+.login-box img.avatar {
+  width: 160px;
+  height: 160px;
+  border-radius: 80px;
+  margin: 20px;
+}
+
+.login-box select,
+.login-box button {
+  display: block;
+  width: 90%;
+  height: 2em;
+  margin: 0 auto 10px auto;
+}
+
+.login-box button {
+  border: none;
+  background-color: #cfb289;
+}
+
+/* login-header */
+
+.login-header {
+  padding: 10px;
+  border-bottom: 1px solid #cfb289;
+  background-color: #cfb289;
+}
+
+.login-header h3,
+.login-header p {
+  margin: 0 0 4px 0;
+}
+
+/* userbox */
+
+.userbox-left,
+.userbox-right {
+  float: right;
+  width: 120px;
+  margin: 0px 60px 0px 0px;
+  /*
+  border: 1px solid #cfb289;
+  border: 1px solid #f8ead5;
+  border-radius: 3px;
+  */
+}
+
+.userbox-left {
+  float: left;
+  height: 120px;
+  margin: 0px 0px 0px 60px;
+  /*
+  border: 1px solid #f8ead5;
+  border: 1px solid #cfb289;
+  */
+}
+
+.userbox-right img {
+  height: 100px;
+  border-radius: 50px;
+  margin: 0px 10px 6px 10px;
+}
+
+.userbox-right p {
+  margin: 0 10px 10px 10px;
+  text-align: center;
+}
+
+/* Questions List: group-selector (tabs) */
+
+.group-selector {
+  width: 100%;
+  max-width: 590px;
+  margin: 0 auto;
+  border: 1px solid #cfb289;
+  border-bottom-style: none;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.group-button {
+  float:left;
+  width: 50%;
+  padding: 10px 0;
+  text-align: center;
+}
+
+.group-button button {
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+/* Questions-List: questions-list */
+
+.questions-list ul {
+  margin: 0;
+}
+
+.questions-list li {
+  padding: 0;
+}
+
+/* Questions-List: question-sub */
+
+.question-sub {
+  margin: 10px;
+  border: 1px solid #cfb289;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.question-sub img.avatar {
+  height: 100px;
+  border-radius: 50px;
+  margin: 10px 10px 10px 20px;
+  float: left;
+}
+
+/* Questions List: question-info */
+
+.question-info {
+  float: left;
+  width: 57%;
+  margin: 10px 10px 10px 20px;
+  padding: 0px 0px 10px 20px;
+  border-left: 1px solid #cfb289;
+}
+
+.question-info h3,
+.question-info h4 {
+  margin: 0 0 6px 0;
+}
+
+.question-info p {
+  margin: 0 0 6px 0;
+}
+
+.question-info button {
+  margin-top: 10px;
+  width: 120px;
+  background-color: #cfb289;
+
+  border: none;
+  margin-right: 10px;
+  height: 30px;
+  cursor: pointer;
+}
+
+/* Poll Results */
+
+.result-summary {
+  margin: 10px 0;
+  padding: 6px 10px;
+  border: 1px solid #cfb289;
+  border-radius: 3px;
+}
+
+/* New Question */
+
+.newq-form {
+  margin: 10px 0;
+}
+
+.newq-form p,
+.newq-form input {
+  margin: 0 0 6px 0;
+}
+
+.newq-form button {
+  display: block;
+  width: 160px;
+  margin-top: 10px;
+}
+
+/* Leader Board */
+
+.score {
+  padding: 0;
+}
+
+.questions-count {
+  float: left;
+  margin: 10px 10px 10px 20px;
+  padding: 0px 20px 10px 20px;
+  border-left: 1px solid #cfb289;
+  border-right: 1px solid #cfb289;
+}
+
+.questions-total {
+  float: left;
+  margin: 10px 10px 10px 30px;
+}
+
+.item-caption {
+  float: left;
+  width: 160px;
+  margin-bottom: 10px;
+}
+
+.item-count {
+  float: left;
+  width: 30px;
+  text-align: right;
+  margin-bottom: 10px;
+}
