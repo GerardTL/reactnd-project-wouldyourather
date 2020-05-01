@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import Score from './Score'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import Score from './Score';
 import Page404 from './Page404';
 
 class Leaderboard extends Component {
@@ -28,12 +28,11 @@ class Leaderboard extends Component {
     if (this.state.loginUser === null && authedUser === 'nouser') {
       errorMessage = 'Leaderboard: manually entering URL ' +
       'terminates session, with possible loss of data.';
-      return <Page404 errMsg={errorMessage} />
+      return <Page404 authedUser={authedUser} errMsg={errorMessage} />
     }
-
-    if (this.state.loginUser === 'nouser' && authedUser === 'nouser') {
+    else if (this.state.loginUser === 'nouser' && authedUser === 'nouser') {
       errorMessage = 'Leaderboard: sorry, you are not logged in.';
-      return <Page404 errMsg={errorMessage} />
+      return <Page404 authedUser={authedUser} errMsg={errorMessage} />
     }
 
     return (

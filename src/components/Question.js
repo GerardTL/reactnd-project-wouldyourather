@@ -1,9 +1,9 @@
-import React, { Component, Fragment } from 'react'
-import { withRouter } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { avatarImg } from '../utils/api'
-import { handleSaveQuestionAnswer } from '../actions/questions'
-import Page404 from './Page404'
+import React, { Component, Fragment } from 'react';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { avatarImg } from '../utils/api';
+import { handleSaveQuestionAnswer } from '../actions/questions';
+import Page404 from './Page404';
 
 class Question extends Component {
   state = {
@@ -18,7 +18,9 @@ class Question extends Component {
     }
 
     /* console.log('Question, componentDidMount: authedUser = ' + this.props.authedUser +
-    ', loginUser = ' + this.state.loginUser); */
+    ', loginUser = ' + this.state.loginUser +
+    ', voted = ' + this.props.voted +
+    ', showVote = ' + this.state.showVote); */
     this.setState({
       loginUser: this.props.authedUser
     });
@@ -48,25 +50,34 @@ class Question extends Component {
 
   render() {
     const { authedUser, id, question, name, avatarURL } = this.props;
-  
-    /* console.log('Question, render: ' + 
-      'authedUser = ' + authedUser +
-      ', loginUser = ' + this.state.loginUser +
-      ', id = ' + id + 
-      ', question.author = ' + question.author +
-      ', showVote = ' + this.state.showVote); */
-
-    let errorMessage;
+    let bError = false, errorMessage;
 
     if (this.state.loginUser === null && authedUser === 'nouser') {
+      bError = true;
       errorMessage = 'Question: manually entering URL ' +
       'terminates session, with possible loss of data.';
-      return <Page404 errMsg={errorMessage} />
+    }
+    else if (this.state.loginUser === 'nouser' && authedUser === 'nouser') {
+      bError = true;
+      errorMessage = 'Question: sorry, you are not logged in.';
+    }
+    else if (question.author === 'Error') {
+      bError = true;
+      errorMessage = 'Question: question \'' + id + 
+      '\' not found.';
     }
 
-    if (this.state.loginUser === 'nouser' && authedUser === 'nouser') {
-      errorMessage = 'Question: sorry, you are not logged in.';
-      return <Page404 errMsg={errorMessage} />
+    if (bError) {
+      return <Page404 authedUser={authedUser} errMsg={errorMessage} />
+    }
+
+    let voted = false;
+
+    if (question.optionOne.votes.indexOf(authedUser) > -1) {
+      voted = true;
+    }
+    else if (question.optionTwo.votes.indexOf(authedUser) > -1) {
+      voted = true;
     }
 
     let 
@@ -74,7 +85,7 @@ class Question extends Component {
       yourVoteOne, yourVoteTwo, 
       percentOne, percentTwo;
 
-    if (!this.state.showVote) {
+    if (voted) {
       optionOneCount = question.optionOne.votes.length;
       optionTwoCount = question.optionTwo.votes.length;
       totalCount = optionOneCount + optionTwoCount;
@@ -93,6 +104,14 @@ class Question extends Component {
       }
     }
 
+    /* console.log('Question, render: ' + 
+      'authedUser = ' + authedUser +
+      ', loginUser = ' + this.state.loginUser +
+      ', id = ' + id + 
+      ', question.author = ' + question.author +
+      ', showVote = ' + this.state.showVote +
+      ', voted = ' + voted); */
+
     return (
       <div className="question-main">
         <h4 className="question-header">{name} asks:</h4>
@@ -103,7 +122,7 @@ class Question extends Component {
         />
         <div className='question-info'>
 
-          { this.state.showVote ? (
+          { !voted ? (
 
             <Fragment>
               <h3>Would you rather</h3>
@@ -179,8 +198,7 @@ function mapStateToProps ({authedUser, users, questions}, {match}) {
   let 
     id = match.params.id, 
     name = 'Error', 
-    avatarURL = '../../images/anon.jpg',
-    voted = false;
+    avatarURL = '../../images/anon.jpg';
 
   let question = {
     id: 'error',
@@ -211,13 +229,6 @@ function mapStateToProps ({authedUser, users, questions}, {match}) {
     question = questions[id];
     name = users[question.author].name;
     avatarURL = users[question.author].avatarURL;
-
-    if (question.optionOne.votes.indexOf(authedUser) > -1) {
-      voted = true;
-    }
-    else if (question.optionTwo.votes.indexOf(authedUser) > -1) {
-      voted = true;
-    }
   }
 
   return {
@@ -225,8 +236,7 @@ function mapStateToProps ({authedUser, users, questions}, {match}) {
     id,
     question,
     name,
-    avatarURL,
-    voted
+    avatarURL
   }
 }
 

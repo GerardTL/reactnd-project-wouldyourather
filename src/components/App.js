@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { handleInitialData } from '../actions/shared';
 import LoadingBar from 'react-redux-loading';
@@ -10,6 +10,7 @@ import Question from './Question';
 import Newquestion from './Newquestion';
 import Leaderboard from './Leaderboard';
 import Logout from './Logout';
+import Page404 from './Page404';
 import { avatarImg } from '../utils/api';
 import './App.css';
 
@@ -20,7 +21,9 @@ class App extends Component {
   render() {
     const { authedUser, name, avatarURL } = this.props;
     const loggedIn = (authedUser !== null && authedUser !=='nouser');
-    /* console.log('App.js, render(): authedUser = ' + authedUser); */
+    /* console.log('App.js, render(): authedUser = ' + authedUser +
+      ', props = ' + this.props
+    ); */
 
     return (
       <Router>
@@ -28,7 +31,7 @@ class App extends Component {
         <LoadingBar />
         <div className="container">
           <h2 className='center'>Would You Rather</h2>
-          <Nav />
+          <Nav authedUser={authedUser} name={name} />
 
           {loggedIn &&
             <Fragment>
@@ -44,18 +47,23 @@ class App extends Component {
             </Fragment>
           }
 
-          <Route path='/' exact>
-            {!loggedIn ?
-              <Login />
-            :
-              <Questionslist />}
-          </Route>
-          <Route path='/questions/:id' component={Question} />
-          <Route path='/add' component={Newquestion} />
-          <Route path='/leaderboard' component={Leaderboard} />
-          <Route path='/logout'>
-            <Logout name={name} avatarURL={avatarURL} />
-          </Route>
+          <Switch>
+            <Route path='/' exact>
+              {!loggedIn ?
+                <Login />
+              :
+                <Questionslist />}
+            </Route>
+            <Route path='/questions/:id' component={Question} />
+            <Route path='/add' component={Newquestion} />
+            <Route path='/leaderboard' component={Leaderboard} />
+            <Route path='/logout'>
+              <Logout name={name} avatarURL={avatarURL} />
+            </Route>
+            <Route path='/:target'>
+              <Page404 authedUser={authedUser} errMsg='Unrecognized URL' />
+            </Route>
+          </Switch>
 
         </div>
         </Fragment>

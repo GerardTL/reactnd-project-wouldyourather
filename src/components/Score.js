@@ -1,5 +1,5 @@
-import React from 'react'
-import { avatarImg } from '../utils/api'
+import React from 'react';
+import { avatarImg } from '../utils/api';
 
 function Score (props) {
   const 

@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
-import { avatarImg } from '../utils/api'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { avatarImg } from '../utils/api';
 
 class Questionsub extends Component {
   handleVoteClick = (e, id) => {

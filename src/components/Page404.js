@@ -1,26 +1,37 @@
-import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
-import groupRandom from '../images/group_random.png'
+import React, { Component } from 'react';
+import groupRandom from '../images/group_random.png';
+import Login from './Login';
 
 class Page404 extends Component {
+  state={
+    toLogin: false
+  }
+
   handleClick = () => {
-    this.props.history.push(`/`);
+    this.setState({ toLogin: true });
   }
 
   render() {
-    /* console.log('Page404, this.props.errMsg = ' + this.props.errMsg); */
-    const { errMsg } = this.props;
+    const { authedUser, errMsg } = this.props;
+    /* console.log('Page404, authedUser = ' + authedUser +
+      ', errMsg = ' + errMsg); */
     const msgText = errMsg == null || errMsg.length <= 0 ?
       'The app can only respond if you are logged in!'
       :
       errMsg;
+
+    if (authedUser === 'nouser' && this.state.toLogin) {
+      return <Login />
+    }
 
     return (
       <div className="login-box">
         <div className="login-header">
           <h3>Oops!&nbsp;&nbsp; 404 PAGE!&nbsp;&nbsp; Oops!</h3>
           <p>{msgText}</p>
-          <p>Please log in and try again!</p>
+          {authedUser === 'nouser' &&
+            <p>Please log in and try again!</p>
+          }
         </div>
 
         <img
@@ -28,11 +39,13 @@ class Page404 extends Component {
           alt='Would You Rather?'
         />
 
-        <button onClick={this.handleClick}>Log In</button>
+        {authedUser === 'nouser' &&
+          <button onClick={this.handleClick}>Log In</button>
+        }
         <p><a href="https://www.freepik.com/free-photos-vectors/people">People vector created by freepik - <br />www.freepik.com</a></p>
       </div>
     )
   }
 }
 
-export default withRouter(Page404) 
+export default Page404

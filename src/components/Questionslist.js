@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from 'react'
-import { connect } from 'react-redux'
-import Questionsub from './Questionsub'
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
+import Questionsub from './Questionsub';
 
 class Questionslist extends Component {
   state = {
@@ -17,6 +17,7 @@ class Questionslist extends Component {
   }
 
   render() {
+    /* console.log('Questionslist: this.props = ' + this.props); */
     const bgLight = '#f8ead5', bgDark = '#cfb289';
     const showAnswered = this.state.showAnswered;
     const { authedUser, questionIds, questions } = this.props;

@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { avatarImg } from '../utils/api'
-import { handleSaveQuestion } from '../actions/questions'
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { avatarImg } from '../utils/api';
+import { handleSaveQuestion } from '../actions/questions';
 import Page404 from './Page404';
 
 class Newquestion extends Component {
@@ -48,12 +48,11 @@ class Newquestion extends Component {
     if (this.state.loginUser === null && authedUser === 'nouser') {
       errorMessage = 'Newquestion: manually entering URL ' +
         'terminates session, with possible loss of data.';
-      return <Page404 errMsg={errorMessage} />
+      return <Page404 authedUser={authedUser} errMsg={errorMessage} />
     }
-
-    if (this.state.loginUser === 'nouser' && authedUser === 'nouser') {
+    else if (this.state.loginUser === 'nouser' && authedUser === 'nouser') {
       errorMessage = 'Newquestion: sorry, you are not logged in.';
-      return <Page404 errMsg={errorMessage} />
+      return <Page404 authedUser={authedUser} errMsg={errorMessage} />
     }
 
     return (
